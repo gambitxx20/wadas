@@ -166,12 +166,17 @@ class Penjualan extends REST_Controller {
         );
 
         $message = '';
-        $success = 0;
-        
-        $this->order_model->add($data);
-        $message = 'Order berhasil dibuat';
-        $success = 1;
-        
+        $dataBarang = $this->barang_model->getById($data['id_barang'])->row();
+        if ($dataBarang->qty < $data['qty_barang']) {
+            $message = 'Order Gagal Quantity melebihi Stok';
+            $success = 0;
+        }else{
+
+            $message = 'Order berhasil dibuat';
+            $this->order_model->add($data);
+            $success = 1;
+        }
+                
 
         $response = [
             'data' => $data,
@@ -214,7 +219,7 @@ class Penjualan extends REST_Controller {
     {   
         $json = json_decode(file_get_contents('php://input'));
         
-        $this->perusahaan_model->delete($json->id);
+        $this->penjualan_model->delete($json->id);
         $message = [
             'id' => $json->id,
             'message' => 'Perusahaan Berhasil di-delete',
