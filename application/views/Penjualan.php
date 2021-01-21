@@ -85,8 +85,8 @@
 	            	<td> '+status+'</td>\
 	            	<td> '+data.order_date+'</td>\
 	            	<td class="w-25">\
-	            		<a href="<?php echo base_url()?>perusahaan/view/'+data.id+'" class="btn btn-primary btn-sm">View</a>\
-	            		<a href="javascript:voidOrder('+data.id+')" class="btn btn-danger btn-sm">Void</a>\
+	            		<a href="<?php echo base_url()?>perusahaan/view/'+data.order_id+'" class="btn btn-primary btn-sm">View</a>\
+	            		<a href="javascript:voidOrder('+data.order_id+')" class="btn btn-danger btn-sm">Void</a>\
 	            	</td>\
 	            	</tr>')          
                 }
@@ -108,7 +108,7 @@
 
 	            if (n.error == 0) {
 	            	alert(n.message);
-	            	window.location.href = '<?php echo base_url()?>perusahaan';
+	            	window.location.href = '<?php echo base_url()?>penjualan';
 	            }
 	        }
 	    });

@@ -187,42 +187,14 @@ class Penjualan extends REST_Controller {
         $this->set_response($response, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
     }
 
-    public function update_post()
-    {
-        // $this->some_model->update_user( ... );
-        $dataPerusahaan = $this->perusahaan_model->getById($this->post('id'))->row();
-        $input = $this->post();
-        
-        $checkPerusahaan = $this->perusahaan_model->getByName($input['nama'])->row();
-        $message = '';
-        $success = 0;
-        if ($checkPerusahaan == '') {
-        
-            $this->perusahaan_model->update($dataPerusahaan->id,$input);
-            $message = 'Perusahaan berhasil diupdate';
-            $success = 1;
-        }else{
-            $message = 'Nama Perusahaan sudah digunakan';
-        }
-        
-        $success = 1;
-        
-        $response = [
-            'message' => $message,
-            'success' => $success,
-        ];
-
-        $this->set_response($response, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
-    }
-
     public function index_delete()
     {   
         $json = json_decode(file_get_contents('php://input'));
         
-        $this->penjualan_model->delete($json->id);
+        $this->order_model->delete($json->id);
         $message = [
             'id' => $json->id,
-            'message' => 'Perusahaan Berhasil di-delete',
+            'message' => 'Penjualan Berhasil di-delete',
             'error' => 0
         ];
 
